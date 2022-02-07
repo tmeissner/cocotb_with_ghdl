@@ -11,7 +11,9 @@ else ifeq (${DUT}, uartrx)
 else ifeq (${DUT}, wishbone)
   MODULE   := tb_wishbone
   TOPLEVEL := wishboneslavee
-  SIM_ARGS := -gSimulation=true
+  SIM_ARGS := -gSimulation=true \
+    -gAddressWidth=8 \
+    -gDataWidth=16
 else
   $(error ${DUT} not available)
 endif
@@ -45,4 +47,4 @@ results:
 
 .PHONY: clean
 clean::
-	rm -rf *.o __pycache__ uarttx uartrx results
+	rm -rf *.o __pycache__ uarttx uartrx wishboneslavee results

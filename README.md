@@ -20,7 +20,7 @@ Have fun!
 ```
 $ git clone https://git.goodcleanfun.de/tmeissner/cocotb_with_ghdl.git
 $ cd cocotb_with_ghdl
-$ git clone https://git.goodcleanfun.de/tmeissner/libvhdl.git	
+$ ./env-setup.sh
 $ docker run --rm -ti --volume=$(pwd):/build -e DISPLAY=$DISPLAY \
   --volume /tmp/.X11-unix:/tmp/.X11-unix hdlc/sim:scipy /bin/bash
 $ ./docker-setup.sh
@@ -111,3 +111,12 @@ make[1]: Leaving directory '/build/tests
 ### UART
 
 Simple tests of UART transmitter & receiver of the *libvhdl* project
+
+* `make DUT=uarttx` or `make`
+* `make DUT=uartrx`
+
+### Wishbone
+
+Simple tests of Wishbone slave of the *libvhdl* project
+
+* `make DUT=wishbone`
