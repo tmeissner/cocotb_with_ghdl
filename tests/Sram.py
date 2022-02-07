@@ -106,15 +106,16 @@ class SramMonitor(Sram):
             if self._wen.value:
                 self._transactions[str(get_sim_time('ns'))] = {
                     "type" : "write",
-                    "adr"  : str(self._adr.value),
-                    "data" : str(self._dout.value)}
+                    "adr"  : self._adr.value,
+                    "data" : self._dout.value}
             elif self._ren.value:
+                _adr = self._adr.value
                 await self._clkedge
                 await ReadOnly()
                 self._transactions[str(get_sim_time('ns'))] = {
                     "type" : "read",
-                    "adr"  : str(self._adr.value),
-                    "data" : str(self._din.value)}
+                    "adr"  : _adr,
+                    "data" : self._din.value}
 
     @property
     def transactions(self, index=None):
