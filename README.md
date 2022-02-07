@@ -16,13 +16,24 @@ Have fun!
 ## Quickstart guide
 
 
-### Get and start docker container
+### Change into docker container & install requirements
 ```
 $ git clone https://git.goodcleanfun.de/tmeissner/cocotb_with_ghdl.git
 $ cd cocotb_with_ghdl
 $ git clone https://git.goodcleanfun.de/tmeissner/libvhdl.git	
 $ docker run --rm -ti --volume=$(pwd):/build -e DISPLAY=$DISPLAY \
   --volume /tmp/.X11-unix:/tmp/.X11-unix hdlc/sim:scipy /bin/bash
+$ ./docker-setup.sh
+Collecting cocotb-bus
+  Downloading cocotb-bus-0.2.1.tar.gz (28 kB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+    Preparing wheel metadata ... done
+...
+Successfully built cocotb-bus wavedrom python-constraint
+Installing collected packages: lxml, cocotb-bus, toposort, svgwrite, pyyaml, pyucis, python-constraint, pyboolector, cocotbext-axi, attrdict, wavedrom, pyvsc, pyuvm, cocotbext-uart, cocotbext-spi, cocotbext-pcie, cocotbext-eth, cocotb-coverage
+Successfully installed attrdict-2.0.1 cocotb-bus-0.2.1 cocotb-coverage-1.1.0 cocotbext-axi-0.1.18 cocotbext-eth-0.1.18 cocotbext-pcie-0.1.20 cocotbext-spi-0.1.2 cocotbext-uart-0.1.2 lxml-4.7.1 pyboolector-3.2.2.20220125.14 python-constraint-1.4.0 pyucis-0.0.5.20211020.1 pyuvm-2.6.1 pyvsc-0.6.7.1792877175 pyyaml-6.0 svgwrite-1.4.1 toposort-1.7 wavedrom-2.0.3.post2
+
 ```
 
 ### Run default test (UART TX)
