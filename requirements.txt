@@ -1,0 +1,17 @@
+# basic bus model
+cocotb-bus
+
+# bus functional models
+cocotbext-axi
+cocotbext-pcie
+cocotbext-eth
+cocotbext-uart
+cocotbext-spi
+
+# verification libraries
+cocotb-coverage
+pyvsc
+pyuvm
+
+# utilities
+wavedrom
