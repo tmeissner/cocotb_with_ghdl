@@ -17,6 +17,9 @@ async def reset_dut(reset_n, duration_ns):
     await Timer(duration_ns, units="ns")
     reset_n.value = 0
 
+def bv_to_hexstr(data):
+    return str(hex(data.integer))
+
 
 @cocotb.test()
 async def test_wishbone(dut):
@@ -74,6 +77,6 @@ async def test_wishbone(dut):
 
     # Example to print transactions collected by SRAM monitor
     with open('results/sram_transactions.log', 'w', encoding='utf-8') as f:
-        f.write((f"{'Time':7}{'Type':7}{'Adr':11}{'Data'}\n"))
+        f.write((f"{'Time':7}{'Type':7}{'Adr':6}{'Data'}\n"))
         for k, v in sram_monitor.transactions.items():
-            f.write((f"{k:7}{v['type']:7}{v['adr']:11}{v['data']} \n"))
+            f.write((f"{k:7}{v['type']:7}{bv_to_hexstr(v['adr']):6}{bv_to_hexstr(v['data'])} \n"))
