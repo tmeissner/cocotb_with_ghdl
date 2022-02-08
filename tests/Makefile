@@ -1,6 +1,9 @@
 # Default test
 DUT ?= uarttx
 
+# Path to ext deps
+EXT := ../ext
+
 ifeq (${DUT}, wishbone)
   TOPLEVEL := wishboneslavee
   SIM_ARGS := -gSimulation=true \
@@ -13,9 +16,9 @@ endif
 # Simulator (GHDL) & RTL related
 SIM                  := ghdl
 TOPLEVEL_LANG        := vhdl
-VHDL_SOURCES_libvhdl := ../libvhdl/common/UtilsP.vhd
-VHDL_SOURCES         := ../libvhdl/syn/*.vhd \
-  ../cryptocores/aes/rtl/vhdl/*.vhd
+VHDL_SOURCES_libvhdl := ${EXT}/libvhdl/common/UtilsP.vhd
+VHDL_SOURCES         := ${EXT}/libvhdl/syn/*.vhd \
+  ${EXT}/cryptocores/aes/rtl/vhdl/*.vhd
 SIM_BUILD            := work
 COMPILE_ARGS         := --std=08
 SIM_ARGS             += \
