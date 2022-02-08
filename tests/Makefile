@@ -1,9 +1,6 @@
 # Default test
 DUT ?= uarttx
 
-
-
-
 ifeq (${DUT}, wishbone)
   TOPLEVEL := wishboneslavee
   SIM_ARGS := -gSimulation=true \
@@ -12,7 +9,6 @@ ifeq (${DUT}, wishbone)
 else
   TOPLEVEL := ${DUT}
 endif
-
 
 # Simulator (GHDL) & RTL related
 SIM                  := ghdl

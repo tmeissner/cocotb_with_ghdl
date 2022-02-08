@@ -50,7 +50,7 @@ mkdir -p work
 analyze ../libvhdl/common/UtilsP.vhd
 analyze ../libvhdl/syn/UartTx.vhd
 elaborate uarttx
-MODULE=tb_uart TESTCASE=test_uarttx TOPLEVEL=uarttx TOPLEVEL_LANG=vhdl \
+MODULE=tb_uarttx TESTCASE= TOPLEVEL=uarttx TOPLEVEL_LANG=vhdl \
  /usr/local/bin/ghdl -r  --workdir=work -Pwork --work=work uarttx --vpi=/usr/local/lib/python3.9/dist-packages/cocotb/libs/libcocotbvpi_ghdl.so --wave=results/uarttx.ghw --psl-report=results/uarttx_psl.json --vpi-trace=results/uarttx_vpi.log
 loading VPI module '/usr/local/lib/python3.9/dist-packages/cocotb/libs/libcocotbvpi_ghdl.so'
      -.--ns INFO     cocotb.gpi                         ..mbed/gpi_embed.cpp:76   in set_program_name_in_venv        Did not detect Python virtual environment. Using system-wide Python interpreter
@@ -59,10 +59,7 @@ VPI module loaded!
      0.00ns INFO     Running on GHDL version 2.0.0-dev (v1.0.0-974-g0e46300c) [Dunoon edition]
      0.00ns INFO     Running tests with cocotb v1.7.0.dev0 from /usr/local/lib/python3.9/dist-packages/cocotb
      0.00ns INFO     Seeding Python random module with 1644236947
-/usr/local/lib/python3.9/dist-packages/attrdict/mapping.py:4: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
-  from collections import Mapping
-/usr/local/lib/python3.9/dist-packages/attrdict/mixins.py:5: DeprecationWarning: Using or importing the ABCs from 'collections' instead of from 'collections.abc' is deprecated since Python 3.3, and in 3.10 it will stop working
-  from collections import Mapping, MutableMapping, Sequence
+...
      0.00ns INFO     Found test tb_uart.test_uarttx
      0.00ns INFO     running test_uarttx (1/1)
                        First simple test
@@ -78,20 +75,7 @@ VPI module loaded!
   1170.00ns INFO     Received data: 0xaf
   1190.00ns INFO     Sending data:  0x56
   2280.00ns INFO     Received data: 0x56
-  2300.00ns INFO     Sending data:  0xb1
-  3390.00ns INFO     Received data: 0xb1
-  3410.00ns INFO     Sending data:  0x80
-  4500.00ns INFO     Received data: 0x80
-  4520.00ns INFO     Sending data:  0xc4
-  5610.00ns INFO     Received data: 0xc4
-  5630.00ns INFO     Sending data:  0x8
-  6720.00ns INFO     Received data: 0x8
-  6740.00ns INFO     Sending data:  0x68
-  7830.00ns INFO     Received data: 0x68
-  7850.00ns INFO     Sending data:  0x30
-  8940.00ns INFO     Received data: 0x30
-  8960.00ns INFO     Sending data:  0xa2
- 10050.00ns INFO     Received data: 0xa2
+...
  10070.00ns INFO     Sending data:  0x70
  11160.00ns INFO     Received data: 0x70
  11160.00ns INFO     test_uarttx passed
@@ -107,6 +91,13 @@ make[1]: Leaving directory '/build/tests
 ```
 
 ## Available Tests
+
+
+### AES
+
+Simple tests of AES of the *cryptocores* project
+
+* `make DUT=aes`
 
 ### UART
 
