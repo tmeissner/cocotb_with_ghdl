@@ -1,29 +1,25 @@
 # Default test
 DUT ?= uarttx
 
-# Test related variables
-ifeq (${DUT}, uarttx)
-  MODULE   := tb_uart
-  TOPLEVEL := ${DUT}
-else ifeq (${DUT}, uartrx)
-  MODULE   := tb_uart
-  TOPLEVEL := ${DUT}
-else ifeq (${DUT}, wishbone)
-  MODULE   := tb_wishbone
+
+
+
+ifeq (${DUT}, wishbone)
   TOPLEVEL := wishboneslavee
   SIM_ARGS := -gSimulation=true \
     -gAddressWidth=8 \
     -gDataWidth=16
 else
-  $(error ${DUT} not available)
+  TOPLEVEL := ${DUT}
 endif
 
 
 # Simulator (GHDL) & RTL related
 SIM                  := ghdl
 TOPLEVEL_LANG        := vhdl
-VHDL_SOURCES_libvhdl := ../libvhdl/common/UtilsP.vhd	
-VHDL_SOURCES         := ../libvhdl/syn/*.vhd
+VHDL_SOURCES_libvhdl := ../libvhdl/common/UtilsP.vhd
+VHDL_SOURCES         := ../libvhdl/syn/*.vhd \
+  ../cryptocores/aes/rtl/vhdl/*.vhd
 SIM_BUILD            := work
 COMPILE_ARGS         := --std=08
 SIM_ARGS             += \
@@ -32,7 +28,7 @@ SIM_ARGS             += \
   --vpi-trace=results/${TOPLEVEL}_vpi.log
 
 # Cocotb related
-TESTCASE            := test_${DUT}
+MODULE              := tb_${DUT}
 COCOTB_LOG_LEVEL    := DEBUG
 CUSTOM_COMPILE_DEPS := results
 COCOTB_RESULTS_FILE := results/${TOPLEVEL}.xml
@@ -47,4 +43,4 @@ results:
 
 .PHONY: clean
 clean::
-	rm -rf *.o __pycache__ uarttx uartrx wishboneslavee results
+	rm -rf *.o __pycache__ uarttx uartrx wishboneslavee aes results
