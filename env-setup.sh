@@ -7,5 +7,9 @@ if [ ! -d cocotbext-wishbone/.git ]; then
 fi
 
 if [ ! -d libvhdl/.git ]; then
-  git clone https://github.com/tmeissner/libvhdl.git	
+  git clone https://github.com/tmeissner/libvhdl.git
+fi
+
+if [ ! -d cryptocores/.git ]; then
+  git clone https://github.com/tmeissner/cryptocores.git
 fi

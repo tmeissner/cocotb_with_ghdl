@@ -8,7 +8,7 @@ class Vai:
     def __init__(self, clock, data, valid, accept, *args, **kwargs):
         self._version = "0.0.1"
 
-        self.log = logging.getLogger(f"cocotb.{data._path}")
+        self.log = logging.getLogger(f"cocotb.{valid._path}")
 
         self._data = data
         self._valid = valid
@@ -28,17 +28,26 @@ class VaiDriver(Vai):
         self.log.info("  cocotbext-vai version %s", self._version)
         self.log.info("  Copyright (c) 2022 Torsten Meissner")
 
-        # Drive input defaults (setimmediatevalue to avoid x asserts)
-        self._data.setimmediatevalue(0)
+        # Hack to drive lists of signals
+        if isinstance(self._data, list):
+            for entry in self._data:
+                entry.setimmediatevalue(0)
+        else:
+            self._data.setimmediatevalue(0)
         self._valid.setimmediatevalue(0)
 
     async def send(self, data, sync=True):
         if sync:
             await self._clkedge
 
-        self.log.info("Sending data:  %s", hex(data))
         self._valid.value = 1
-        self._data.value = data
+        # Hack to drive lists of signals
+        if isinstance(self._data, list):
+            for i in range(len(self._data)):
+                self._data[i].value = data[i]
+        else:
+            self.log.info("Sending data:  %s", hex(data))
+            self._data.value = data
 
         while True:
             await ReadOnly()
