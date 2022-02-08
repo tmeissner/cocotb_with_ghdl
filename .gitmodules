@@ -1,0 +1,6 @@
+[submodule "ext/cryptocores"]
+	path = ext/cryptocores
+	url = https://git.goodcleanfun.de/tmeissner/cryptocores.git
+[submodule "ext/libvhdl"]
+	path = ext/libvhdl
+	url = https://git.goodcleanfun.de/tmeissner/libvhdl.git
