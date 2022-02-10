@@ -1,7 +1,6 @@
 import logging
 import random
 import cocotb
-import wavedrom
 from Uart import UartDriver, UartReceiver
 from Vai import VaiDriver, VaiReceiver
 from cocotb.clock import Clock
@@ -33,17 +32,16 @@ async def test_uartrx(dut):
     dut.rx_i.setimmediatevalue(1)
     dut.accept_i.setimmediatevalue(0)
 
-    clock = Clock(dut.clk_i, 10, units="ns")  # Create a 1 us period clock
+    clock = Clock(dut.clk_i, 10, units="ns")  # Create a 10 ns period clock
     cocotb.start_soon(clock.start())  # Start the clock
 
     # Execution will block until reset_dut has completed
-    dut._log.info("Hold reset")
     await reset_dut(reset_n, 100)
     dut._log.info("Released reset")
 
     # Test 10 UART transmissions
     for i in range(10):
-        await clkedge
+        await Timer(100, units="ns")
         val = random.randint(0, 255)
         await uart_driver.send(val)
         rec = await vai_receiver.receive();

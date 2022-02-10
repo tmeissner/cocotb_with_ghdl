@@ -48,7 +48,7 @@ class SramRead(Sram):
             if self._ren.value == 1:
                 _data = self._mem[str(self._adr.value)]
                 self._din.value = _data
-                self.log.info("Read data: %s from adr: %s", hex(_data), hex(self._adr.value))
+                self.log.info(f"Read data:  {hex(_data)} from adr: {hex(self._adr.value)}")
 
 
 class SramWrite(Sram):
@@ -76,7 +76,7 @@ class SramWrite(Sram):
             await self._clkedge
             if self._wen.value == 1:
                 self._mem[str(self._adr.value)] = self._dout.value
-                self.log.info("Wrote data: %s to adr: %s", hex(self._dout.value), hex(self._adr.value))
+                self.log.info(f"Wrote data: {hex(self._dout.value)} to adr:   {hex(self._adr.value)}")
 
 
 class SramMonitor(Sram):

@@ -1,14 +1,13 @@
-# test_uart.py
-
 import logging
 import random
 import cocotb
-import pprint
+import wavedrom
 from collections import defaultdict
 from Sram import SramRead, SramWrite, SramMonitor
 from cocotb.clock import Clock
 from cocotb.triggers import FallingEdge, RisingEdge, Timer, ReadOnly
 from cocotbext.wishbone.driver import WishboneMaster, WBOp
+from cocotb.wavedrom import Wavedrom, trace
 
 
 # Reset coroutine
@@ -17,8 +16,9 @@ async def reset_dut(reset_n, duration_ns):
     await Timer(duration_ns, units="ns")
     reset_n.value = 0
 
-def bv_to_hexstr(data):
-    return str(hex(data.integer))
+def wave2svg(wave, file):
+    svg = wavedrom.render(wave)
+    svg.saveas(file)
 
 
 @cocotb.test()
@@ -63,20 +63,30 @@ async def test_wishbone(dut):
     cocotb.start_soon(clock.start())  # Start the clock
 
     # Execution will block until reset_dut has completed
-    dut._log.info("Hold reset")
     await reset_dut(reset, 100)
     dut._log.info("Released reset")
 
-    # Test 10 Wishbone transmissions
-    for i in range(10):
-        await clkedge
-        adr = random.randint(0, 255)
-        data = random.randint(0, 2**16-1)
-        await wbmaster.send_cycle([WBOp(adr=adr, dat=data)])
-        rec = await wbmaster.send_cycle([WBOp(adr=adr)])
+    # Trace transmissions using wavedrom
+    with trace(dut.wbcyc_i, dut.wbstb_i, dut.wbwe_i, dut.wback_o,
+        dut.wbadr_i, dut.wbdat_i, dut.wbdat_o, clk=dut.wbclk_i) as waves:
+
+        # Test 10 Wishbone transmissions
+        for i in range(10):
+            await clkedge
+            adr = random.randint(0, 255)
+            data = random.randint(0, 2**16-1)
+            await wbmaster.send_cycle([WBOp(adr=adr, dat=data)])
+            rec = await wbmaster.send_cycle([WBOp(adr=adr)])
+
+        # Print out waveforms as json & svg
+        _wave = waves.dumpj()
+        with open('results/tb_wishbone_wave.json', 'w', encoding='utf-8') as f:
+            f.write(_wave)
+        wave2svg(_wave, 'results/tb_wishbone_wave.svg')
+
 
     # Example to print transactions collected by SRAM monitor
-    with open('results/sram_transactions.log', 'w', encoding='utf-8') as f:
+    with open('results/tb_wishbone_sram_transactions.log', 'w', encoding='utf-8') as f:
         f.write((f"{'Time':7}{'Type':7}{'Adr':6}{'Data'}\n"))
-        for k, v in sram_monitor.transactions.items():
-            f.write((f"{k:7}{v['type']:7}{bv_to_hexstr(v['adr']):6}{bv_to_hexstr(v['data'])} \n"))
+        for key, value in sram_monitor.transactions.items():
+            f.write((f"{key:7}{value['type']:7}{hex(value['adr']):6}{hex(value['data'])}\n"))
