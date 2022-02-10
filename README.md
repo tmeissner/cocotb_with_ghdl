@@ -29,6 +29,7 @@ $ cd cocotb_with_ghdl
 $ ./env-setup.sh
 $ docker run --rm -ti --volume=$(pwd):/build -e DISPLAY=$DISPLAY \
   --volume /tmp/.X11-unix:/tmp/.X11-unix hdlc/sim:scipy /bin/bash
+$ cd /build
 $ ./docker-setup.sh
 Collecting cocotb-bus
   Downloading cocotb-bus-0.2.1.tar.gz (28 kB)
