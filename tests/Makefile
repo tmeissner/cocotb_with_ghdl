@@ -13,6 +13,12 @@ else
   TOPLEVEL := ${DUT}
 endif
 
+# Cocotb related
+MODULE              := tb_${DUT}
+COCOTB_LOG_LEVEL    := DEBUG
+CUSTOM_COMPILE_DEPS := results
+COCOTB_RESULTS_FILE := results/${MODULE}.xml
+
 # Simulator (GHDL) & RTL related
 SIM                  := ghdl
 TOPLEVEL_LANG        := vhdl
@@ -22,15 +28,9 @@ VHDL_SOURCES         := ${EXT}/libvhdl/syn/*.vhd \
 SIM_BUILD            := work
 COMPILE_ARGS         := --std=08
 SIM_ARGS             += \
-  --wave=results/${TOPLEVEL}.ghw \
-  --psl-report=results/${TOPLEVEL}_psl.json \
-  --vpi-trace=results/${TOPLEVEL}_vpi.log
-
-# Cocotb related
-MODULE              := tb_${DUT}
-COCOTB_LOG_LEVEL    := DEBUG
-CUSTOM_COMPILE_DEPS := results
-COCOTB_RESULTS_FILE := results/${TOPLEVEL}.xml
+  --wave=results/${MODULE}.ghw \
+  --psl-report=results/${MODULE}_psl.json \
+  --vpi-trace=results/${MODULE}_vpi.log
 
 
 include $(shell cocotb-config --makefiles)/Makefile.sim
