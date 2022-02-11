@@ -1,7 +1,7 @@
 import logging
 import cocotb
 from cocotb.utils import get_sim_time
-from cocotb.triggers import FallingEdge, RisingEdge, Timer, ReadOnly
+from cocotb.triggers import FallingEdge, RisingEdge, Timer
 
 
 class Sram:
@@ -111,7 +111,6 @@ class SramMonitor(Sram):
             elif self._ren.value:
                 _adr = self._adr.value
                 await self._clkedge
-                await ReadOnly()
                 self._transactions[str(get_sim_time('ns'))] = {
                     "type" : "read",
                     "adr"  : _adr,

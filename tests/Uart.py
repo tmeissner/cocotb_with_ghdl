@@ -1,5 +1,5 @@
 import logging
-from cocotb.triggers import FallingEdge, RisingEdge, Timer, ReadOnly
+from cocotb.triggers import FallingEdge, RisingEdge, Timer
 
 
 class Uart:
@@ -53,7 +53,6 @@ class UartReceiver(Uart):
         self._rec = 0
         for x in range(self._bits):
             await self._wait_cycle()
-            await ReadOnly()
             self._rec |= bool(self._txrx.value.integer) << x
 
         if self._par:
@@ -70,21 +69,18 @@ class UartReceiver(Uart):
         """Consume and check start bit"""
         for x in range(int(self._div/2)):
             await self._clkedge
-        await ReadOnly()
         if self._txrx.value == 1:
             self.log.warning("Start bit set")
 
     async def _get_stop_bit(self):
         """Consume and check stop bit"""
         await self._wait_cycle()
-        await ReadOnly()
         if self._txrx.value == 0:
             self.log.warning("Stop bit not set")
 
     async def _get_parity_bit(self):
         """Consume and check parity bit"""
         await self._wait_cycle()
-        await ReadOnly()
         if self.odd_parity(self._rec) != self._txrx.value:
             self.log.warning("Parity wrong")
 

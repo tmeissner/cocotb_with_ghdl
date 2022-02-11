@@ -1,10 +1,10 @@
 import logging
 import random
 import cocotb
-from Uart import UartDriver, UartReceiver
-from Vai import VaiDriver, VaiReceiver
+from Uart import UartDriver
+from Vai import VaiReceiver
 from cocotb.clock import Clock
-from cocotb.triggers import FallingEdge, RisingEdge, Timer, ReadOnly
+from cocotb.triggers import RisingEdge, Timer
 
 
 # Reset coroutine

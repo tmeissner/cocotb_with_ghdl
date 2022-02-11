@@ -1,13 +1,10 @@
 import logging
-import random
 import cocotb
-import pprint
 from Vai import VaiDriver, VaiReceiver, VaiMonitor
 from cocotb.clock import Clock
 from cocotb.queue import Queue
-from cocotb.triggers import FallingEdge, RisingEdge, Timer, ReadOnly
+from cocotb.triggers import RisingEdge, Timer
 from Crypto.Cipher import AES
-from Crypto.Util.number import long_to_bytes, getRandomNBitInteger
 import vsc
 
 

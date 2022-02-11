@@ -1,7 +1,7 @@
 import logging
 import cocotb
 from cocotb.utils import get_sim_time
-from cocotb.triggers import FallingEdge, RisingEdge, Timer, ReadOnly
+from cocotb.triggers import FallingEdge, RisingEdge, Timer
 
 
 class Vai:
@@ -56,7 +56,6 @@ class VaiDriver(Vai):
         self.log.info(f"Send data:    {_info}")
 
         while True:
-            await ReadOnly()
             if self._accept.value:
                 break
             await self._clkedge
@@ -84,7 +83,6 @@ class VaiReceiver(Vai):
             await self._clkedge
 
         while True:
-            await ReadOnly()
             if self._valid.value:
                 break
             await self._clkedge

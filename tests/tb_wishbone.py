@@ -5,7 +5,7 @@ import wavedrom
 from collections import defaultdict
 from Sram import SramRead, SramWrite, SramMonitor
 from cocotb.clock import Clock
-from cocotb.triggers import FallingEdge, RisingEdge, Timer, ReadOnly
+from cocotb.triggers import RisingEdge, Timer
 from cocotbext.wishbone.driver import WishboneMaster, WBOp
 from cocotb.wavedrom import Wavedrom, trace
 
@@ -77,6 +77,8 @@ async def test_wishbone(dut):
             data = random.randint(0, 2**16-1)
             await wbmaster.send_cycle([WBOp(adr=adr, dat=data)])
             rec = await wbmaster.send_cycle([WBOp(adr=adr)])
+            assert rec[0].datrd == data, \
+                f"Read data incorrect, got {hex(rec[0].datrd)}, expected {hex(data)}"
 
         # Print out waveforms as json & svg
         _wave = waves.dumpj()
