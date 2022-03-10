@@ -26,9 +26,9 @@ class constraints():
     def c(self):
         self.data >= 0 and self.data <= 2**128-1
         vsc.dist(self.key, [
-            vsc.weight(0,  25),
-            vsc.weight((1,2**128-2), 50),
-            vsc.weight((2**128-1), 25)])
+            vsc.weight(0,  15),
+            vsc.weight((1,2**128-2), 70),
+            vsc.weight((2**128-1), 15)])
 
 
 # Stimuli covergroup
@@ -104,7 +104,7 @@ async def test_aes_enc(dut):
     dut._log.info("Released reset")
 
     # Test 10 AES calculations
-    for i in range(10):
+    for i in range(20):
         # Get now random stimuli
         cr.randomize()
         _key = cr.key
@@ -160,7 +160,7 @@ async def test_aes_dec(dut):
     dut._log.info("Released reset")
 
     # Test 10 AES calculations
-    for i in range(10):
+    for i in range(20):
         # Get now random stimuli
         cr.randomize()
         _key = cr.key
