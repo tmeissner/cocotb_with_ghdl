@@ -12,7 +12,6 @@ date: February 2022
 * Introduction
 
 * Functional Verification
-
 * Co-Simulation
 
 * Cocotb
@@ -89,7 +88,7 @@ date: February 2022
 
 - VHDL Procedural Interface (VHPI)
 - Verilog Procedural Interface (VPI)
-- Propitrary interfaces (FLI)
+- Proprietary interfaces (FLI)
 - Access data in VHDL models in the simulator
 
 ## Features
@@ -111,7 +110,7 @@ HDL testbench controls program flow
 - Verifying HDL designs with Python
 - HDL normally only used for design, not the testbench
 - Simulator only used to execute DUT RTL description
-- Support many simulators (Free & propitrary)
+- Supports many simulators (Free & proprietary)
 - Free & open-source, active community
 
 ##
@@ -235,7 +234,7 @@ async def test_aes_enc(dut):
 # Cocotb Triggers
 
 - Indicate when cocotb scheduler should resume coroutine execution
-- Triggers should awaited for by coroutines
+- Triggers should be awaited by coroutines
   - Cause execution of the current coroutine to pause
   - Execution of paused coroutine will resumes when trigger fires
 - Triggers for simulator events, task synchronization etc.
@@ -256,18 +255,18 @@ t2 = Timer(15, units='ns')
 t_ret = await First(t1, t2)  # returns after 10 ns simulation time
 ~~~~
 
-# Cocotb Example: Verifying an UART transmitter
+# Cocotb Example: Verifying a UART transmitter
 
  ![](images/cocotb_uarttx.png)
 
-# Cocotb Example: Verifying an UART transmitter
+# Cocotb Example: Verifying a UART transmitter
 
 ##
 
 ![](images/vai_uart_wave.png)
 
 
-# Cocotb Example: Verifying an UART transmitter
+# Cocotb Example: Verifying a UART transmitter
 
 ## Valid-Accept Driver Model
 
@@ -295,7 +294,7 @@ async def send(self, data, sync=True):
     self._valid.value = 0
 ~~~~
 
-# Cocotb Example: Verifying an UART transmitter
+# Cocotb Example: Verifying a UART transmitter
 
 ## UART Receiver Model
 
@@ -324,7 +323,7 @@ async def receive(self):
     return self._rec
 ~~~~
 
-# Cocotb Example: Verifying an UART transmitter
+# Cocotb Example: Verifying a UART transmitter
 
 ## Test function
 
@@ -351,7 +350,7 @@ async def test_uarttx(dut):
         assert rec == i, "UART sent data was incorrect on the {}th cycle".format(i)
 ~~~~
 
-# Cocotb Example: Verifying an UART transmitter
+# Cocotb Example: Verifying a UART transmitter
 
 ~~~~ {.shell .stretch}
 loading VPI module '/usr/local/lib/python3.9/dist-packages/cocotb/libs/libcocotbvpi_ghdl.so'
@@ -392,7 +391,7 @@ VPI module loaded!
 - Verification libraries
   - pyuvm
   - cocotb-coverage
-  - umv-python
+  - uvm-python
 - Depending on cocotb
 
 ## Python generic
@@ -443,12 +442,12 @@ class my_cr():
 
 - Easy to use
 - Good documentation
-- In active development with regularly releases
+- In active development with regular releases
 - Free and open-source
 - Allows Python SW-developers to verify digital systems
 - Supports all major simulators used by FPGA teams
 
-## Presentations code examples
+## Presentation's code examples
 
 * https://github.com/tmeissner/cocotb_with_ghdl
 
@@ -491,7 +490,7 @@ dut.some_array[0].value = 1
 - Triggers in the postpone phase
 - All signals have settled
 - No more updates may occur on the clock edge event
-- Sampling any signal here returns values settled current clock cycle
+- Sampling any signal here returns values settled in current clock cycle
 
 # Extras: Accessing signals
 
