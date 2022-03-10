@@ -1,0 +1,7 @@
+{signal: [
+  {name: 'reset',  wave: '01...|.....'},
+  {name: 'clk',    wave: 'P....|.....'},
+  {name: 'valid',  wave: '0.1.0|..10.'},
+  {name: 'accept', wave: '0..10|1..0.'},
+  {name: 'data',   wave: 'x.3.x|..3x.'}
+]}

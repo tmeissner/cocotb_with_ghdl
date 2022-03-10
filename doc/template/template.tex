@@ -1,0 +1,191 @@
+\documentclass[usenames,dvipsnames,10pt,aspectratio=169]{beamer}
+\usepackage{fontspec}
+\setmainfont{Liberation Sans}
+\setmonofont{Liberation Mono}
+%\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+$endif$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+
+\setbeamercolor{title}{fg=Maroon}
+\setbeamercolor{subtitle}{fg=MidnightBlue}
+\setbeamercolor{frametitle}{fg=MidnightBlue}
+\setbeamercolor{structure}{fg=MidnightBlue}
+
+% Don't show things we don't want to see
+\beamertemplatenavigationsymbolsempty
+
+% Slide number in lower right
+\setbeamertemplate{footline}{
+	\raisebox{5pt}{
+		\makebox[\paperwidth]{
+      \hfill\makebox[0.15\linewidth]{\color{Gray} \footnotesize Torsten Meißner}
+      \hfill\makebox[0.7\linewidth]{\color{Gray} \footnotesize \insertshorttitle}
+			\hfill\makebox[0.15\linewidth]{\color{Gray} \footnotesize \insertframenumber ~/ \inserttotalframenumber}
+		}
+	}
+	\hspace*{5pt}
+}
+
+% Color and shape of bullets
+\setbeamercolor{item}{fg=Gray}
+\setbeamercolor{subitem}{fg=Gray}
+% \setbeamercolor{itemize/enumerate subbody}{fg=gray}
+\setbeamertemplate{itemize item}{{\textendash}}
+\setbeamertemplate{itemize subitem}{{\textendash}}
+\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}
+\setbeamerfont{itemize/enumerate subitem}{size=\footnotesize}
+
+%\usepackage{fancyvrb}
+%\DefineVerbatimEnvironment{verbatim}{Verbatim}{frame=leftline, fontsize=\small, baselinestretch=1.17}
+%\VerbatimFootnotes % allows verbatim text in footnotes
+
+\usepackage{listings}
+\lstset{
+	basicstyle=\ttfamily\scriptsize,
+	keywordstyle=\color{Maroon},
+	stringstyle=\color{NavyBlue},
+	showstringspaces=false,
+	frame=leftline,
+	xleftmargin=5pt,
+	tabsize=2,
+}
+
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$if(tables)$
+\usepackage{longtable,booktabs}
+\usepackage{caption}
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+$endif$
+$if(graphics)$
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
+\makeatother
+\centering
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+
+% Prevent slide breaks in the middle of a paragraph:
+\widowpenalties 1 10000
+\raggedbottom
+
+\newif\ifbibliography
+$if(section-titles)$
+\AtBeginPart{
+  \let\insertpartnumber\relax
+  \let\partname\relax
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \let\insertsectionnumber\relax
+    \let\sectionname\relax
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \let\insertsubsectionnumber\relax
+  \let\subsectionname\relax
+  \frame{\subsectionpage}
+}
+$endif$
+
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+$if(numbersections)$
+\setcounter{secnumdepth}{5}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(dir)$
+\ifxetex
+  % load bidi as late as possible as it modifies e.g. graphicx
+  $if(latex-dir-rtl)$
+  \usepackage[RTLdocument]{bidi}
+  $else$
+  \usepackage{bidi}
+  $endif$
+\fi
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \TeXXeTstate=1
+  \newcommand{\RL}[1]{\beginR #1\endR}
+  \newcommand{\LR}[1]{\beginL #1\endL}
+  \newenvironment{RTL}{\beginR}{\endR}
+  \newenvironment{LTR}{\beginL}{\endL}
+\fi
+$endif$
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \\ $endfor$}
+$endif$
+\date{$date$}
+
+\begin{document}
+$if(title)$
+\frame{\maketitle}
+$endif$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+
+$if(toc)$
+\begin{frame}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+$endif$
+$body$
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

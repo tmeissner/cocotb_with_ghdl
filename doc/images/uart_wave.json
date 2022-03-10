@@ -1,0 +1,4 @@
+{signal: [
+  {name: 'tx', wave: '10.10...101..'},
+  {name: '',  wave: "x34.......53x", data: ["start", "data (0x42, 0d66)", "par", "stop"] }
+]}
