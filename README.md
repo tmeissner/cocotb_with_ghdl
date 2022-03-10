@@ -26,7 +26,6 @@ Another useful tool is GTKWave, install it if you want to use the waveform files
 ```
 $ git clone --recursive https://git.goodcleanfun.de/tmeissner/cocotb_with_ghdl.git
 $ cd cocotb_with_ghdl
-$ ./env-setup.sh
 $ docker run --rm -ti --volume=$(pwd):/build -e DISPLAY=$DISPLAY \
   --volume /tmp/.X11-unix:/tmp/.X11-unix hdlc/sim:scipy /bin/bash
 $ cd /build
