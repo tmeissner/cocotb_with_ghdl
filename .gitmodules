@@ -4,3 +4,6 @@
 [submodule "ext/libvhdl"]
 	path = ext/libvhdl
 	url = https://git.goodcleanfun.de/tmeissner/libvhdl.git
+[submodule "ext/pyuvm"]
+	path = ext/pyuvm
+	url = https://github.com/pyuvm/pyuvm.git
