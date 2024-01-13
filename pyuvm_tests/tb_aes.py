@@ -1,14 +1,27 @@
-from cocotb.queue import Queue
-from cocotb.triggers import RisingEdge, Timer, Combine
-from pyuvm import *
-import cocotb
-import pyuvm
-import vsc
+from cocotb.triggers import Combine
+from pyuvm import (
+    uvm_test,
+    uvm_sequence,
+    uvm_sequence_item,
+    uvm_sequencer,
+    uvm_driver,
+    uvm_component,
+    uvm_subscriber,
+    uvm_env,
+    uvm_factory,
+    uvm_analysis_port,
+    uvm_tlm_analysis_fifo,
+    uvm_get_port,
+    ConfigDB,
+    UVMConfigItemNotFound,
+)
 from vsc import get_coverage_report
 from VaiBfm import VaiBfm, Mode
 from Coverage import constraints, covergroup
 from Crypto.Cipher import AES
-
+import cocotb
+import pyuvm
+import vsc
 
 
 @pyuvm.test()
