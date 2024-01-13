@@ -19,10 +19,6 @@ RUFF_ARGS := --fix
 endif
 endif
 
-.PHONY: 
-FIX:
-	@#
-
 # Cocotb related
 MODULE              := tb_${DUT}
 COCOTB_LOG_LEVEL    := DEBUG
@@ -48,6 +44,11 @@ EXTRA_ARGS := --std=08
 VHDL_LIB_ORDER := libvhdl
 endif
 
+ifneq (, $(shell which cocotb-config))
+include $(shell cocotb-config --makefiles)/Makefile.sim
+else
+$(warning WARNING: cocotb not found)
+endif
 
 check format:
 ifneq (, $(shell which ruff))
@@ -56,19 +57,16 @@ else
 	@echo "ERROR: ruff not found"; exit 1
 endif
 
-
-ifneq (, $(shell which cocotb-config))
-include $(shell cocotb-config --makefiles)/Makefile.sim
-else
-$(warning WARNING: cocotb not found)
-endif
-
+FIX:
+	@#
 
 results:
 	mkdir -p results
 
-
 clean::
-	rm -rf *.o __pycache__ uarttx uartrx wishboneslavee aes results $(SIM_BUILD)
+	rm -rf *.o uarttx uartrx wishboneslavee aes results $(SIM_BUILD)
 
-.PHONY: clean check format FIX
+cleanall:
+	rm -rf .ruff_cache __pycache__
+
+.PHONY: clean cleanall check format FIX
