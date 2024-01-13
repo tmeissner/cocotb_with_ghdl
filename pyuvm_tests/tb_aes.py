@@ -47,7 +47,6 @@ class ParallelTest(AesTest):
 
 # Virtual sequence that starts other sequences
 class TestAllSeq(uvm_sequence):
-
     async def body(self):
         # get the sequencer handle
         seqr = ConfigDB().get(None, "", "SEQR")
@@ -59,7 +58,6 @@ class TestAllSeq(uvm_sequence):
 
 # Running encryption and decryption sequences in parallel
 class TestAllParallelSeq(uvm_sequence):
-
     async def body(self):
         seqr = ConfigDB().get(None, "", "SEQR")
         enc_rand_seq = EncRandSeq("enc_random")
@@ -71,7 +69,6 @@ class TestAllParallelSeq(uvm_sequence):
 
 # Sequence item which holds the stimuli for one operation
 class AesSeqItem(uvm_sequence_item):
-
     def __init__(self, name, mode, key, data):
         super().__init__(name)
         self.mode = mode
@@ -79,7 +76,11 @@ class AesSeqItem(uvm_sequence_item):
         self.data = data
 
     def __eq__(self, other):
-        same = self.mode == other.mode and self.key == other.key and self.data == other.data
+        same = (
+            self.mode == other.mode
+            and self.key == other.key
+            and self.data == other.data
+        )
         return same
 
     def __str__(self):
@@ -90,7 +91,6 @@ class AesSeqItem(uvm_sequence_item):
 # Abstract basis sequence class
 # set_operands() has to be implemented by class that inherits from this class
 class BaseSeq(uvm_sequence):
-
     async def body(self):
         self.cr = constraints()
         for _ in range(20):
@@ -143,7 +143,6 @@ class Driver(uvm_driver):
 
 
 class Scoreboard(uvm_component):
-
     def build_phase(self):
         self.input_fifo = uvm_tlm_analysis_fifo("input_fifo", self)
         self.output_fifo = uvm_tlm_analysis_fifo("output_fifo", self)
@@ -171,12 +170,16 @@ class Scoreboard(uvm_component):
                 else:
                     reference = aes.decrypt(data.buff)
                 if result.buff == reference:
-                    self.logger.info(f"PASSED: {Mode(mode).name} {data.hex()} with key "
-                                      f"{key.hex()} = {result.hex()}")
+                    self.logger.info(
+                        f"PASSED: {Mode(mode).name} {data.hex()} with key "
+                        f"{key.hex()} = {result.hex()}"
+                    )
                 else:
-                    self.logger.error(f"FAILED: {Mode(mode).name} {data.hex()} with key "
-                                      f"{key.hex()} = 0x{result.hex()}, "
-                                      f"expected {reference.hex()}")
+                    self.logger.error(
+                        f"FAILED: {Mode(mode).name} {data.hex()} with key "
+                        f"{key.hex()} = 0x{result.hex()}, "
+                        f"expected {reference.hex()}"
+                    )
                     self.passed = False
 
     def report_phase(self):
@@ -201,12 +204,10 @@ class Monitor(uvm_component):
 
 # Coverage collector and checker
 class Coverage(uvm_subscriber):
-
     def start_of_simulation_phase(self):
         self.cg = covergroup()
         try:
-            self.disable_errors = ConfigDB().get(
-                self, "", "DISABLE_COVERAGE_ERRORS")
+            self.disable_errors = ConfigDB().get(self, "", "DISABLE_COVERAGE_ERRORS")
         except UVMConfigItemNotFound:
             self.disable_errors = False
 
@@ -217,19 +218,17 @@ class Coverage(uvm_subscriber):
     def report_phase(self):
         if not self.disable_errors:
             if self.cg.get_coverage() != 100.0:
-                self.logger.warning(
-                    f"Functional coverage incomplete.")
+                self.logger.warning("Functional coverage incomplete.")
             else:
                 self.logger.info("Covered all operations")
-        with open('results/tb_aes_fcover.txt', 'a', encoding='utf-8') as f:
+        with open("results/tb_aes_fcover.txt", "a", encoding="utf-8") as f:
             f.write(get_coverage_report(details=True))
-        vsc.write_coverage_db('results/tb_aes_fcover.xml')
+        vsc.write_coverage_db("results/tb_aes_fcover.xml")
 
 
 # AES test bench environment
 # Creates instances of components and connects them
 class AesEnv(uvm_env):
-
     def build_phase(self):
         self.seqr = uvm_sequencer("seqr", self)
         ConfigDB().set(None, "*", "SEQR", self.seqr)

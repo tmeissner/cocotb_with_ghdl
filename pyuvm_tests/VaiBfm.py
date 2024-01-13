@@ -20,7 +20,7 @@ class Mode(enum.IntEnum):
     Decrypt = 1
 
 
-# VAI BFM with queues for 
+# VAI BFM with queues for
 class VaiBfm(metaclass=pyuvm.Singleton):
     """Valid-Accept Bfm"""
 
@@ -32,7 +32,9 @@ class VaiBfm(metaclass=pyuvm.Singleton):
         self.driver_queue = Queue(maxsize=1)
         self.in_monitor_queue = Queue(maxsize=0)
         self.out_monitor_queue = Queue(maxsize=0)
-        self.clock = Clock(self.dut.clk_i, 10, units="ns")  # Create a 10 ns period clock
+        self.clock = Clock(
+            self.dut.clk_i, 10, units="ns"
+        )  # Create a 10 ns period clock
         cocotb.start_soon(self.clock.start())
 
     # Reset coroutine
@@ -82,9 +84,11 @@ class VaiBfm(metaclass=pyuvm.Singleton):
         while True:
             await RisingEdge(self.dut.clk_i)
             if self.dut.valid_i.value and self.dut.accept_o.value:
-                in_tuple = (self.dut.mode_i.value,
-                            self.dut.key_i.value,
-                            self.dut.data_i.value)
+                in_tuple = (
+                    self.dut.mode_i.value,
+                    self.dut.key_i.value,
+                    self.dut.data_i.value,
+                )
                 self.in_monitor_queue.put_nowait(in_tuple)
 
     # VAI output monitor
@@ -94,7 +98,6 @@ class VaiBfm(metaclass=pyuvm.Singleton):
             if self.dut.valid_o.value and self.dut.accept_i.value:
                 out_data = self.dut.data_o.value
                 self.out_monitor_queue.put_nowait(out_data)
-
 
     # Launching the coroutines using start_soon
     def start_tasks(self):
