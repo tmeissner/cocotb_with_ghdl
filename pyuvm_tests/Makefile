@@ -66,7 +66,7 @@ results:
 clean::
 	rm -rf *.o uarttx uartrx wishboneslavee aes results $(SIM_BUILD)
 
-cleanall:
+cleanall: clean
 	rm -rf .ruff_cache __pycache__
 
 .PHONY: clean cleanall check format FIX
