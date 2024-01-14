@@ -1,0 +1,162 @@
+<UCIS xmlns:ucis="http://www.w3.org/2001/XMLSchema-instance" writtenBy="root" writtenTime="2024-01-14T00:00:00" ucisVersion="1.0">
+  <sourceFiles fileName="__null__file__" id="1"/>
+  <sourceFiles fileName="&lt;unknown&gt;" id="2"/>
+  <sourceFiles fileName="/build/pyuvm_tests/Coverage.py" id="3"/>
+  <sourceFiles fileName="/build/pyuvm_tests/tb_aes.py" id="4"/>
+  <historyNodes historyNodeId="0" logicalName="logicalName" physicalName="foo.ucis" kind="HistoryNodeKind.TEST" testStatus="true" simtime="0.0" timeunit="ns" runCwd="." cpuTime="0.0" seed="0" cmd="" args="" compulsory="0" date="2024-01-14T19:48:35" userName="user" cost="0.0" toolCategory="UCIS:simulator" ucisVersion="1.0" vendorId="unknown" vendorTool="unknown" vendorToolVersion="unknown"/>
+  <instanceCoverages name="cg_inst" key="0">
+    <id file="1" line="1" inlineCount="1"/>
+    <covergroupCoverage>
+      <cgInstance name="bla" key="0">
+        <options/>
+        <cgId cgName="covergroup" moduleName="covergroup">
+          <cginstSourceId file="1" line="1" inlineCount="1"/>
+          <cgSourceId file="1" line="1" inlineCount="1"/>
+        </cgId>
+        <coverpoint name="enc" key="0">
+          <options/>
+          <coverpointBin name="enc" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="20"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <coverpoint name="dec" key="0">
+          <options/>
+          <coverpointBin name="dec" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="20"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <coverpoint name="key0" key="0">
+          <options/>
+          <coverpointBin name="key0" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="9"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <coverpoint name="keyF" key="0">
+          <options/>
+          <coverpointBin name="keyF" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="7"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <cross name="encXkey0" key="0">
+          <options/>
+          <crossExpr>enc</crossExpr>
+          <crossExpr>key0</crossExpr>
+          <crossBin name="&lt;enc,key0&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="5"/>
+          </crossBin>
+        </cross>
+        <cross name="encXkeyF" key="0">
+          <options/>
+          <crossExpr>enc</crossExpr>
+          <crossExpr>keyF</crossExpr>
+          <crossBin name="&lt;enc,keyF&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="3"/>
+          </crossBin>
+        </cross>
+        <cross name="decXkey0" key="0">
+          <options/>
+          <crossExpr>dec</crossExpr>
+          <crossExpr>key0</crossExpr>
+          <crossBin name="&lt;dec,key0&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="4"/>
+          </crossBin>
+        </cross>
+        <cross name="decXkeyF" key="0">
+          <options/>
+          <crossExpr>dec</crossExpr>
+          <crossExpr>keyF</crossExpr>
+          <crossBin name="&lt;dec,keyF&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="4"/>
+          </crossBin>
+        </cross>
+      </cgInstance>
+      <cgInstance name="bla_1" key="0">
+        <options/>
+        <cgId cgName="covergroup" moduleName="covergroup">
+          <cginstSourceId file="1" line="1" inlineCount="1"/>
+          <cgSourceId file="1" line="1" inlineCount="1"/>
+        </cgId>
+        <coverpoint name="enc" key="0">
+          <options/>
+          <coverpointBin name="enc" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="20"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <coverpoint name="dec" key="0">
+          <options/>
+          <coverpointBin name="dec" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="20"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <coverpoint name="key0" key="0">
+          <options/>
+          <coverpointBin name="key0" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="6"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <coverpoint name="keyF" key="0">
+          <options/>
+          <coverpointBin name="keyF" type="bins" key="0">
+            <range from="-1" to="-1">
+              <contents coverageCount="5"/>
+            </range>
+          </coverpointBin>
+        </coverpoint>
+        <cross name="encXkey0" key="0">
+          <options/>
+          <crossExpr>enc</crossExpr>
+          <crossExpr>key0</crossExpr>
+          <crossBin name="&lt;enc,key0&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="2"/>
+          </crossBin>
+        </cross>
+        <cross name="encXkeyF" key="0">
+          <options/>
+          <crossExpr>enc</crossExpr>
+          <crossExpr>keyF</crossExpr>
+          <crossBin name="&lt;enc,keyF&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="1"/>
+          </crossBin>
+        </cross>
+        <cross name="decXkey0" key="0">
+          <options/>
+          <crossExpr>dec</crossExpr>
+          <crossExpr>key0</crossExpr>
+          <crossBin name="&lt;dec,key0&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="4"/>
+          </crossBin>
+        </cross>
+        <cross name="decXkeyF" key="0">
+          <options/>
+          <crossExpr>dec</crossExpr>
+          <crossExpr>keyF</crossExpr>
+          <crossBin name="&lt;dec,keyF&gt;" key="0" type="default">
+            <index>-1</index>
+            <contents coverageCount="4"/>
+          </crossBin>
+        </cross>
+      </cgInstance>
+    </covergroupCoverage>
+  </instanceCoverages>
+</UCIS>

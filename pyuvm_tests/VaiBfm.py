@@ -27,7 +27,7 @@ class VaiBfm(metaclass=pyuvm.Singleton):
     def __init__(self):
         self.log = logging.getLogger()
         self.log.info("Valid-accept BFM")
-        self.log.info("  Copyright (c) 2022 Torsten Meissner")
+        self.log.info("  Copyright (c) 2024 Torsten Meissner")
         self.dut = cocotb.top
         self.driver_queue = Queue(maxsize=1)
         self.in_monitor_queue = Queue(maxsize=0)

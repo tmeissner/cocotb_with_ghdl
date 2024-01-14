@@ -171,14 +171,14 @@ class Scoreboard(uvm_component):
                     reference = aes.decrypt(data.buff)
                 if result.buff == reference:
                     self.logger.info(
-                        f"PASSED: {Mode(mode).name} {data.hex()} with key "
-                        f"{key.hex()} = {result.hex()}"
+                        f"PASSED: {Mode(mode).name} 0x{data.integer:032x} with key "
+                        f"0x{key.integer:032x} = 0x{result.integer:032x}"
                     )
                 else:
                     self.logger.error(
-                        f"FAILED: {Mode(mode).name} {data.hex()} with key "
-                        f"{key.hex()} = 0x{result.hex()}, "
-                        f"expected {reference.hex()}"
+                        f"FAILED: {Mode(mode).name} 0x{data.integer:032x} with key "
+                        f"0x{key.integer:032x} = 0x{result.integer:032x}, "
+                        f"expected 0x{int.from_bytes(reference, 'big'):032x}"
                     )
                     self.passed = False
 
