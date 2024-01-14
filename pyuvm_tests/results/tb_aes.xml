@@ -1,7 +1,0 @@
-<testsuites name="results">
-  <testsuite name="all" package="all">
-    <property name="random_seed" value="1705261712" />
-    <testcase name="AesTest" classname="tb_aes" file="/usr/local/lib/python3.9/dist-packages/pyuvm/extension_classes.py" lineno="27" time="0.4286825656890869" sim_time_ns="6090.000001" ratio_time="14206.316021297982" />
-    <testcase name="ParallelTest" classname="tb_aes" file="/usr/local/lib/python3.9/dist-packages/pyuvm/extension_classes.py" lineno="41" time="0.41454362869262695" sim_time_ns="6090.000001" ratio_time="14690.854181516255" />
-  </testsuite>
-</testsuites>
